@@ -12,4 +12,14 @@ export default class TeamsController {
       res.status(500).json(error);
     }
   };
+
+  findTeamById = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { id } = req.params;
+      const teamData = await this.teamsService.findTeamById(Number(id));
+      res.status(200).json(teamData);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  };
 }
