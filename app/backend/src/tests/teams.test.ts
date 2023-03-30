@@ -15,7 +15,7 @@ const { expect } = chai;
 describe('Testa as requisições da rota /teams', () => {
   afterEach(() => {
       sinon.restore();
-    })
+    });
   it('Testa se a requisição get retorna todos os times em um array', async () => {
     sinon.stub(Teams, 'findAll').resolves(allTeams);
     const res: Response = await chai.request(app).get('/teams');
@@ -30,10 +30,11 @@ describe('Testa as requisições da rota /teams', () => {
     expect(res.status).to.deep.equal(200);
     expect(res.body).to.be.deep.equal(allTeams[0]);
   });
-//   it('Testa se a requisição get retorna status 500 enviando um id errado', async () => {
-//     sinon.stub(Teams, 'findByPk').resolves(null);
-//     const res: Response = await chai.request(app).get( '/teams/99');
-
-//     expect(res.status).to.deep.equal(500);
-//   });
+  // it('Testa se a requisição get retorna status 500 enviando um id errado', async () => {
+  //   sinon.restore();
+  //   sinon.stub(Teams, 'findByPk').resolves();
+  //   const res: Response = await chai.request(app).get( '/teams/100');
+    
+  //   expect(res.status).to.be.equal(500);
+  // });
 });
