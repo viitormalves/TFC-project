@@ -12,13 +12,23 @@ export default class UsersController {
       const userData = await this.usersService.findByEmail(data.email);
 
       if (!userData) {
-        return res.status(404).json({ message: 'Invalid email or password' });
+        return res.status(401).json({ message: 'Invalid email or password' });
       }
       if (!bcrypt.compareSync(data.password, userData.password || '')) {
         return res.status(401).json({ message: 'Invalid email or password' });
       }
       const token = createJWT(userData);
       return res.status(200).json({ token });
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  };
+
+  findRole = async (req: Request, res: Response) => {
+    try {
+      const { id } = req.body.user;
+      const userRole = await this.usersService.findById(id);
+      res.status(200).json(userRole);
     } catch (error) {
       res.status(500).json(error);
     }

@@ -10,6 +10,8 @@ const createJWT = (payload: IUser): string => {
   return jwt.sign({ id, email }, JWT_SECRET, JWT_CONFIG);
 };
 
-const fake = () => {};
+const verifyJWT = (token: string) => jwt.verify(token, JWT_SECRET);
 
-export { createJWT, fake };
+const decoded = (token: string) => jwt.decode(token);
+
+export { createJWT, verifyJWT, decoded };
