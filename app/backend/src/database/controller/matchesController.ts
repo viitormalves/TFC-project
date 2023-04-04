@@ -8,8 +8,14 @@ export default class MatchesController {
     private teamsService: TeamsService,
   ) {}
 
-  findAllMatches = async (_req: Request, res: Response) => {
+  findAllMatches = async (req: Request, res: Response) => {
     try {
+      const { inProgress } = req.query;
+      if (inProgress) {
+        const trueMatches = await this.matchesService.findMatchesProgress(true);
+        res.status(200).json(trueMatches);
+      }
+
       const allMatches = await this.matchesService.findAllMatches();
       res.status(200).json(allMatches);
     } catch (error) {
