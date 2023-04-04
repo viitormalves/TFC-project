@@ -13,6 +13,7 @@ const matchesService = new MatchesService(Matches);
 const matchesController = new MatchesController(matchesService);
 
 matchesRouter.get('/', matchesController.findAllMatches);
+matchesRouter.patch('/:id', authToken, matchesController.updateMatch);
 matchesRouter.patch('/:id/finish', authToken, matchesController.finishMatch);
 
 export default matchesRouter;
