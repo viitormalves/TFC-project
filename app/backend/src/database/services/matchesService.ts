@@ -26,7 +26,8 @@ export default class MatchesService {
     return result;
   }
 
-//   public async findTeamById(id: number): Promise<IMatch | null> {
-//     return this.matchesModel.findByPk(id);
-//   }
+  public async finishMatch(id: number) {
+    const [affected] = await this.matchesModel.update({ inProgress: false }, { where: { id } });
+    return affected;
+  }
 }
