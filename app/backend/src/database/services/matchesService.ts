@@ -15,15 +15,15 @@ export default class MatchesService {
   }
 
   public async findMatchesProgress(progress: boolean): Promise<IMatch[]> {
-    return this.matchesModel.findAll({
-      where: {
-        inProgress: progress,
-      },
+    const result = await this.matchesModel.findAll({
+      where: { inProgress: progress },
       include: [
         { model: Teams, as: 'homeTeam', attributes: { exclude: ['id'] } },
         { model: Teams, as: 'awayTeam', attributes: { exclude: ['id'] } },
       ],
     });
+
+    return result;
   }
 
 //   public async findTeamById(id: number): Promise<IMatch | null> {

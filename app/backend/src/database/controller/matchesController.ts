@@ -1,21 +1,21 @@
 import { Request, Response } from 'express';
 import MatchesService from '../services/matchesService';
-import TeamsService from '../services/teamsService';
+// import TeamsService from '../services/teamsService';
 
 export default class MatchesController {
   constructor(
     private matchesService: MatchesService,
-    private teamsService: TeamsService,
+    // private teamsService: TeamsService,
   ) {}
 
   findAllMatches = async (req: Request, res: Response) => {
     try {
       const { inProgress } = req.query;
       if (inProgress) {
-        const trueMatches = await this.matchesService.findMatchesProgress(true);
-        res.status(200).json(trueMatches);
+        const result = (inProgress === 'true');
+        const findMatches = await this.matchesService.findMatchesProgress(result);
+        return res.status(200).json(findMatches);
       }
-
       const allMatches = await this.matchesService.findAllMatches();
       res.status(200).json(allMatches);
     } catch (error) {
