@@ -13,7 +13,6 @@ export default function validateLogin(
   if (!regex.test(data.email)) {
     return res.status(401).json({ message: 'Invalid email or password' });
   }
-  console.log(req.body);
   if (data.password.length < 6) {
     return res.status(401).json({ message: 'Invalid email or password' });
   }
