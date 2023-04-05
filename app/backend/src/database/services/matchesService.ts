@@ -22,20 +22,25 @@ export default class MatchesService {
         { model: Teams, as: 'awayTeam', attributes: { exclude: ['id'] } },
       ],
     });
-
     return result;
   }
 
-  public async finishMatch(id: number) {
+  public async finishMatch(id: number): Promise<number> {
     const [affected] = await this.matchesModel.update({ inProgress: false }, { where: { id } });
     return affected;
   }
 
-  public async updateMatch(id: number, result: IGoals) {
+  public async updateMatch(id: number, result: IGoals): Promise<number> {
     const { homeTeamGoals, awayTeamGoals } = result;
     const [affected] = await this.matchesModel.update({
       homeTeamGoals, awayTeamGoals,
     }, { where: { id } });
     return affected;
+  }
+
+  public async insertMatch(dataMatch: IMatch) {
+    const dataMatchCompleted = { ...dataMatch, inProgress: true };
+    const result = await this.matchesModel.create(dataMatchCompleted);
+    return result;
   }
 }
