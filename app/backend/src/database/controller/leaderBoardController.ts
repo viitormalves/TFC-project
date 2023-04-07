@@ -12,4 +12,13 @@ export default class leaderBoardController {
       res.status(500).json(error);
     }
   };
+
+  makerLeaderBoardAway = async (_req: Request, res: Response) => {
+    try {
+      const makerLeaderBoardAway = await this.leaderBoardService.makerLeaderBoardAway();
+      res.status(200).json(makerLeaderBoardAway);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  };
 }
