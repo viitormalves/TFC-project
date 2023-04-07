@@ -4,6 +4,7 @@ import Matches from '../models/MatchesModel';
 import Teams from '../models/TeamsModel';
 import LBHomeFunction from '../utils/leaderBoardHome.functions';
 import LBAwayFunction from '../utils/leaderBoardAway.functions';
+import LBComplet from '../utils/leaderBoardComplet.functions';
 
 export default class LeaderBoardService {
   constructor(
@@ -41,5 +42,14 @@ export default class LeaderBoardService {
 
     const result = LBAwayFunction.orderBoard(leaderboardAwayTeams);
     return result;
+  }
+
+  public async makerLeaderBoardComplet() {
+    const leaderboardHomeTeams = await this.makerLeaderBoardHome();
+    const leaderboardAwayTeams = await this.makerLeaderBoardAway();
+
+    const result = LBComplet.board(leaderboardHomeTeams, leaderboardAwayTeams);
+    const order = LBHomeFunction.orderBoard(result);
+    return order;
   }
 }

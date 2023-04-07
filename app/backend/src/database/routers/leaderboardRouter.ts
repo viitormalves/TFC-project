@@ -9,6 +9,7 @@ const leaderBoardRouter = Router();
 const leaderBoardService = new LeaderBoardService(Matches, Teams);
 const leaderBoardController = new LeaderBoardController(leaderBoardService);
 
+leaderBoardRouter.get('/', leaderBoardController.makerLeaderBoardComplet);
 leaderBoardRouter.get('/home', leaderBoardController.makerLeaderBoardHome);
 leaderBoardRouter.get('/away', leaderBoardController.makerLeaderBoardAway);
 

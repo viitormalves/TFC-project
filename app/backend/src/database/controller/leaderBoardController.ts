@@ -21,4 +21,13 @@ export default class leaderBoardController {
       res.status(500).json(error);
     }
   };
+
+  makerLeaderBoardComplet = async (_req: Request, res: Response) => {
+    try {
+      const makerLeaderBoardComplet = await this.leaderBoardService.makerLeaderBoardComplet();
+      res.status(200).json(makerLeaderBoardComplet);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  };
 }
